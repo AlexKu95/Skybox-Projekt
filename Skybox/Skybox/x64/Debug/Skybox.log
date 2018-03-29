@@ -1,0 +1,4 @@
+﻿  main.cpp
+c:\users\alexander kübler\source\repos\skybox\skybox\main.cpp(12): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\alexander kübler\source\repos\skybox\skybox\main.cpp(20): warning C4305: 'argument': truncation from 'double' to 'const float'
+  Skybox.vcxproj -> c:\Users\alexander kübler\source\repos\Skybox\x64\Debug\Skybox.exe
