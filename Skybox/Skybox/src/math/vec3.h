@@ -24,13 +24,14 @@ namespace core { namespace math {
 		tvec3();
 		tvec3(const T& _input);
 		tvec3(const T& _x, const T& _y, const T& _z);
+
 		template <typename U>
 		tvec3(const tvec3<U>& _input) : x(static_cast<T>(_input.x)), y(static_cast<T>(_input.y), z(static_cast<T>(_input.z))) {};
 		
 		template <typename U, typename R>
-		tvec3(const tvec2<U>& _input, const R _rest) : x(static_cast<T>(_input.x)), y(static_cast<T>(_input.y)), z(static_cast<T>(_rest)) {};
+		tvec3(const tvec2<U>& _input, const R& _rest) : x(static_cast<T>(_input.x)), y(static_cast<T>(_input.y)), z(static_cast<T>(_rest)) {};
 		template <typename U, typename R>
-		tvec3(const R _rest, const tvec2<U>& _input) : x(static_cast<T>(_rest)), y(static_cast<T>(_input.x)), z(static_cast<T>(_input.y)) {};
+		tvec3(const R& _rest, const tvec2<U>& _input) : x(static_cast<T>(_rest)), y(static_cast<T>(_input.x)), z(static_cast<T>(_input.y)) {};
 		template <typename U>
 		tvec3(const tvec2<U>& _input) : x(static_cast<T>(_input.x)), y(static_cast<T>(_input.y), z(0)) {};
 
@@ -46,7 +47,7 @@ namespace core { namespace math {
 		T distance(const tvec3& other);
 		T magnitude();
 		T dot(const tvec3& other);
-		tvec3& cross(const tvec3& other);
+		tvec3 cross(const tvec3& other);
 
 		bool operator==(const tvec3& other);
 		bool operator!=(const tvec3& other);
@@ -204,6 +205,16 @@ namespace core { namespace math {
 	T tvec3<T>::dot(const tvec3<T>& other)
 	{
 		return (x*other.x) + (y*other.y)+ (z*other.z);
+	}
+
+	template<typename T>
+	tvec3<T> tvec3<T>::cross(const tvec3& other)
+	{
+		T a = y * other.z - other.y * z;
+		T b = z * other.x - other.z * x;
+		T c = x * other.y - other.x * y;
+		
+		return tvec3(a, b, c);
 	}
 
 	template<typename T>

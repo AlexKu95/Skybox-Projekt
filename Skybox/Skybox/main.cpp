@@ -1,6 +1,7 @@
 #include <iostream>
 #include "src\math\vec2.h"
 #include "src\math\vec3.h"
+#include "src\math\vec4.h"
 
 int main() {
 	using namespace core;
@@ -39,10 +40,25 @@ int main() {
 	vec3 v43(0);
 	v43 += v13;
 
+	vec4 v14(0);
+	vec4 v24(v1,v2);
+	vec4 v34(1, 2, 3, 4);
+	vec4 v44 = v24;
+	vec4 v54;
+	v54 += v44;
+
+	vec3 v53 = v13.cross(v23);
 	std::cout << v13 << std::endl;
 	std::cout << v23 << std::endl;
 	std::cout << v33 << std::endl;
 	std::cout << v43 << std::endl;
+	std::cout << v53 << std::endl;
+
+	std::cout << v14 << std::endl;
+	std::cout << v24 << std::endl;
+	std::cout << v34 << std::endl;
+	std::cout << v44 << std::endl;
+	std::cout << v54 << std::endl;
 
 
 	system("PAUSE");
