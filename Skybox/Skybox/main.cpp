@@ -1,7 +1,5 @@
 #include <iostream>
-#include "src\math\vec2.h"
-#include "src\math\vec3.h"
-#include "src\math\vec4.h"
+#include "src\math\math.h"
 
 int main() {
 	using namespace core;
@@ -60,6 +58,22 @@ int main() {
 	std::cout << v44 << std::endl;
 	std::cout << v54 << std::endl;
 
+	mat4 firstMat(2.0f);
+	mat4 secondMat(v14, v24, v24, v54);
+	mat4 thirdMat;
+	thirdMat = firstMat * secondMat;
+
+	vec4 vectorArray[4] = { v54,v44,v34,v24 };
+	mat4 fourthMat(vectorArray);
+	mat4 ortho;
+	ortho = orthographicRH(-16.0f, 16.0f, -10.0f, 10.0f, 0.0f, 1.0f);
+
+
+	std::cout << firstMat << std::endl;
+	std::cout << secondMat << std::endl;
+	std::cout << thirdMat << std::endl;
+	std::cout << fourthMat << std::endl;
+	std::cout << ortho << std::endl;
 
 	system("PAUSE");
 	return 0;

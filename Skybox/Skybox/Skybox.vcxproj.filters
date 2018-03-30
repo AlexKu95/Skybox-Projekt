@@ -38,5 +38,8 @@
     <ClInclude Include="src\math\math_func.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\math\math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
