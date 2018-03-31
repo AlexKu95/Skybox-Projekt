@@ -5,6 +5,12 @@ int main() {
 	using namespace core;
 	using namespace math;
 
+
+	int zahl = 10;
+	std::cout << zahl << std::endl;
+
+	dvec2 ve(10.1,123.3);
+	
 	vec2 v1(0);
 	vec2 v2 = vec2(1.5, 1.5);
 	vec2 v3(3.5);
@@ -74,6 +80,18 @@ int main() {
 	std::cout << thirdMat << std::endl;
 	std::cout << fourthMat << std::endl;
 	std::cout << ortho << std::endl;
+
+	float input[16] = { 1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f};
+	float input2[16] = { 1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f };
+	mat3 first3(input);
+	mat3 second3(input2);
+	mat3 place;
+	place = first3 * second3;
+
+	std::cout << first3 << std::endl;
+	std::cout << second3 << std::endl;
+	std::cout << place << std::endl;
+
 
 	system("PAUSE");
 	return 0;

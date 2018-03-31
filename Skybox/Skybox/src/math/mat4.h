@@ -2,7 +2,7 @@
 
 #include "vec3.h"
 #include "vec4.h"
-#include "math_func.h"
+#include "mat3.h"
 #include <iostream>
 
 namespace core { namespace math {
@@ -10,6 +10,8 @@ namespace core { namespace math {
 	template<typename T>
 	struct tmat4;
 
+	template<typename T>
+	struct tmat3;
 
 	typedef tmat4<float> mat4;
 	typedef tmat4<int> imat4;
@@ -35,9 +37,10 @@ namespace core { namespace math {
 		tmat4(T elementArray[16]);
 		tmat4(tvec4<T> _firstColumn, tvec4<T> _secondColumn, tvec4<T> _thirdColumn, tvec4<T> _fourthColumn);
 		tmat4(tvec4<T> _columns[4]);
+		tmat4(tmat3<T> _matrix3);
 
 		inline tvec4<T> getColumn(int index){return columns[index];}
-		inline tvec4<T> getRow(int index){return tvec4<T>(elements[index * 4], elements[index + 1 * 4], elements[index + 2 * 4], elements[index + 3 * 4]);}
+		inline tvec4<T> getRow(int index){return tvec4<T>(elements[index], elements[index + 1 * 4], elements[index + 2 * 4], elements[index + 3 * 4]);}
 
 		tmat4 identity();
 
@@ -50,19 +53,6 @@ namespace core { namespace math {
 
 		tvec4<T> multiply(const tvec4<T>& other) const;
 		friend tvec4<T> operator*<T>(const tmat4<T>& left, const tvec4<T>& right);
-
-
-		tmat4 orthographicRH(T left, T right, T bottom, T top, T near, T far);
-
-		tmat4 lookAtRH(tvec3<T> eye, tvec3<T> center, tvec3<T> up);
-		tmat4 lookAtLH(tvec3<T> eye, tvec3<T> center, tvec3<T> up);
-
-		tmat4 perspectiveRH(T fovy, T aspect, T zNear, T zFar);
-		tmat4 perspectiveLH(T fovy, T aspect, T zNear, T zFar);
-
-		tmat4 translate(const tvec3<T>& translation);
-		tmat4 rotate(T angle, const tvec3<T>& axis);
-		tmat4 scale(const tvec3<T>& scale);
 
 		inline friend std::ostream& operator<<(std::ostream& stream, const tmat4<T>& matrix) {
 			stream << "mat4  : (";
@@ -117,6 +107,16 @@ namespace core { namespace math {
 	tmat4<T>::tmat4(tvec4<T> _columns[4]) {
 		std::copy(_columns, _columns+4, columns);
 	}
+
+	template< typename T>
+	tmat4<T>::tmat4(tmat3<T> _matrix3) {
+		for (int i = 0; i < 9; i++)
+			elements[i] = _matrix3.elements[i];
+
+		for(int i=9;i<16;i++)
+			elements[i] = 0.0;
+	}
+
 
 	template< typename T>
 	tmat4<T> tmat4<T>::identity()
