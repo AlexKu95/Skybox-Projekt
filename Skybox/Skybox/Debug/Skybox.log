@@ -1,9 +1,0 @@
-﻿  main.cpp
-c:\users\alexander kübler\desktop\github projekts\skybox-projekt\skybox-projekt\skybox\skybox\main.cpp(50): warning C4101: 'vpos_location': unreferenced local variable
-c:\users\alexander kübler\desktop\github projekts\skybox-projekt\skybox-projekt\skybox\skybox\main.cpp(50): warning C4101: 'vcol_location': unreferenced local variable
-c:\users\alexander kübler\desktop\github projekts\skybox-projekt\skybox-projekt\skybox\skybox\main.cpp(49): warning C4101: 'fragment_shader': unreferenced local variable
-c:\users\alexander kübler\desktop\github projekts\skybox-projekt\skybox-projekt\skybox\skybox\main.cpp(49): warning C4101: 'vertex_shader': unreferenced local variable
-c:\users\alexander kübler\desktop\github projekts\skybox-projekt\skybox-projekt\skybox\skybox\main.cpp(50): warning C4101: 'mvp_location': unreferenced local variable
-c:\users\alexander kübler\desktop\github projekts\skybox-projekt\skybox-projekt\skybox\skybox\main.cpp(49): warning C4101: 'program': unreferenced local variable
-c:\users\alexander kübler\desktop\github projekts\skybox-projekt\skybox-projekt\skybox\skybox\main.cpp(49): warning C4101: 'vertex_buffer': unreferenced local variable
-  Skybox.vcxproj -> C:\Users\Alexander Kübler\Desktop\GitHub Projekts\Skybox-Projekt\Skybox-Projekt\Skybox\Debug\Skybox.exe

@@ -1,6 +1,0 @@
-﻿  main.cpp
-c:\users\alexander kübler\desktop\github projekts\skybox-projekt\skybox-projekt\skybox\skybox\main.cpp(12): warning C4101: 'test': unreferenced local variable
-main.obj : error LNK2019: unresolved external symbol glfwInit referenced in function main
-C:\Users\Alexander Kübler\Desktop\GitHub Projekts\Skybox-Projekt\Skybox-Projekt\Skybox\Dependencies\GLFW\lib-vc2015\glfw3.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-C:\Users\Alexander Kübler\Desktop\GitHub Projekts\Skybox-Projekt\Skybox-Projekt\Skybox\Dependencies\GLEW\lib\glew32s.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-C:\Users\Alexander Kübler\Desktop\GitHub Projekts\Skybox-Projekt\Skybox-Projekt\Skybox\x64\Debug\Skybox.exe : fatal error LNK1120: 1 unresolved externals
