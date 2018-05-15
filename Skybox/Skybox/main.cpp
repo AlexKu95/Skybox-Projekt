@@ -1,98 +1,80 @@
 #include <iostream>
 #include "src\math\math.h"
+#include <GL\glew.h>
+#include <GLFW/glfw3.h>
 
-int main() {
-	using namespace core;
-	using namespace math;
-
-
-	int zahl = 10;
-	std::cout << zahl << std::endl;
-
-	dvec2 ve(10.1,123.3);
-	
-	vec2 v1(0);
-	vec2 v2 = vec2(1.5, 1.5);
-	vec2 v3(3.5);
-	vec2 v4(4, 5.6);
-	vec2 v5(100, 0);
-
-	vec2 v6 = 100 + 123;
-	vec2 v7 = v1 + 10;
-	vec2 v8 = 10 + vec2(0);
-	vec2 v9 = v1 + v5;
-
-	v4 = v2 + 5.9;
-
-	v1 += 100;
-	v1 += v2;
-
-	std::cout << v1 << std::endl;
-	std::cout << v2 << std::endl;
-	std::cout << v3 << std::endl;
-	std::cout << v4 << std::endl;
-	std::cout << v5 << std::endl;
-	std::cout << v6 << std::endl;
-	std::cout << v7 << std::endl;
-	std::cout << v8 << std::endl;
-	std::cout << v9 << std::endl;
+using namespace core;
+using namespace math;
 
 
-	vec3 v13(1, 23, 34);
-	vec3 v23(v2, 10);
-	vec3 v33(10,v2);
-	vec3 v43(0);
-	v43 += v13;
 
-	vec4 v14(0);
-	vec4 v24(v1,v2);
-	vec4 v34(1, 2, 3, 4);
-	vec4 v44 = v24;
-	vec4 v54;
-	v54 += v44;
+static const struct
+{
+	float x, y;
+	float r, g, b;
+} vertices[3] =
+{
+	-0.6f, -0.4f, 1.f, 0.f, 0.f },
+{ 0.6f, -0.4f, 0.f, 1.f, 0.f },
+{ 0.f,  0.6f, 0.f, 0.f, 1.f }
+};
+static const char* vertex_shader_text =
+"uniform mat4 MVP;\n"
+"attribute vec3 vCol;\n"
+"attribute vec2 vPos;\n"
+"varying vec3 color;\n"
+"void main()\n"
+"{\n"
+"    gl_Position = MVP * vec4(vPos, 0.0, 1.0);\n"
+"    color = vCol;\n"
+"}\n";
+static const char* fragment_shader_text =
+"varying vec3 color;\n"
+"void main()\n"
+"{\n"
+"    gl_FragColor = vec4(color, 1.0);\n"
+"}\n";
+static void error_callback(int error, const char* description)
+{
+	fprintf(stderr, "Error: %s\n", description);
+}
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+}
+int main(void)
+{
+	GLFWwindow* window;
+	GLuint vertex_buffer, vertex_shader, fragment_shader, program;
+	GLint mvp_location, vpos_location, vcol_location;
+	glfwSetErrorCallback(error_callback);
 
-	vec3 v53 = v13.cross(v23);
-	std::cout << v13 << std::endl;
-	std::cout << v23 << std::endl;
-	std::cout << v33 << std::endl;
-	std::cout << v43 << std::endl;
-	std::cout << v53 << std::endl;
+	if (!glfwInit())
+		exit(EXIT_FAILURE);
 
-	std::cout << v14 << std::endl;
-	std::cout << v24 << std::endl;
-	std::cout << v34 << std::endl;
-	std::cout << v44 << std::endl;
-	std::cout << v54 << std::endl;
+	window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
+	if (!window)
+	{
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+		glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
 
-	mat4 firstMat(2.0f);
-	mat4 secondMat(v14, v24, v24, v54);
-	mat4 thirdMat;
-	thirdMat = firstMat * secondMat;
-
-	vec4 vectorArray[4] = { v54,v44,v34,v24 };
-	mat4 fourthMat(vectorArray);
-	mat4 ortho;
-	ortho = orthographicRH(-16.0f, 16.0f, -10.0f, 10.0f, 0.0f, 1.0f);
+	while (!glfwWindowShouldClose(window))
+	{
+		float ratio;
+		int width, height;
+		glfwGetFramebufferSize(window, &width, &height);
+		ratio = width / (float)height;
+		glViewport(0, 0, width, height);
+		glClear(GL_COLOR_BUFFER_BIT);
 
 
-	std::cout << firstMat << std::endl;
-	std::cout << secondMat << std::endl;
-	std::cout << thirdMat << std::endl;
-	std::cout << fourthMat << std::endl;
-	std::cout << ortho << std::endl;
-
-	float input[16] = { 1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f};
-	float input2[16] = { 1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f,1.0f };
-	mat3 first3(input);
-	mat3 second3(input2);
-	mat3 place;
-	place = first3 * second3;
-
-	std::cout << first3 << std::endl;
-	std::cout << second3 << std::endl;
-	std::cout << place << std::endl;
-
-
-	system("PAUSE");
-	return 0;
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+	glfwDestroyWindow(window);
+	glfwTerminate();
+	exit(EXIT_SUCCESS);
 }
