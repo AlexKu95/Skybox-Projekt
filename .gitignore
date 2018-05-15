@@ -1,6 +1,9 @@
 # Ignore Dependencies
 Skybox/Dependencies/
 
+#ignore Debug
+Skybox\Skybox\Debug
+Skybox\Skybox\x64
 
 # Created by https://www.gitignore.io/api/c++,visualstudio
 
